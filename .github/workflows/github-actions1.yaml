@@ -1,0 +1,19 @@
+name: myfirst github action
+on: workflow_dispatch
+jobs:
+  my-first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v4
+
+      - name: setup-nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: build
+        run: npm ci
+
+      - name: test 
+        run: npm test

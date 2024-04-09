@@ -16,7 +16,7 @@ jobs:
         run: npm test
 
   second_workflow:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     steps:
       - name: checkout

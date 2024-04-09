@@ -1,19 +1,31 @@
-name: myfirst github action
-on: workflow_dispatch
+name: Deploy Project
+on: [push, workflow_dispatch]
 jobs:
-  my-first-job:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: get code
-        uses: actions/checkout@v4
-
-      - name: setup-nodejs
-        uses: actions/setup-node@v4
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: build
+      - name: Install dependencies
         run: npm ci
-
-      - name: test 
+      - name: Run tests
         run: npm test
+
+  second_workflow:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions:checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: pre-req
+        run: npm ci
+      - name: build
+        run: npm run build
